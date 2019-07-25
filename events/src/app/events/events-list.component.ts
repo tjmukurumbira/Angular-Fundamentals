@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from '../shared/event.service';
+import { toBase64String } from '@angular/compiler/src/output/source_map';
+import { ToastrService } from '../shared/toastr.service';
+import { ActivatedRoute } from '@angular/router';
+import { IEvent } from '../shared/event.model';
+
+
 
 @Component({
   selector: 'app-events-list',
@@ -6,23 +13,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events-list.component.css']
 })
 export class EventsListComponent implements OnInit {
-
-  event = {
-    name: 'ngConf 2025',
-    date: '3/1/2025',
-    time: '8am',
-    price: 200,
-    location: {
-      address: '123 Main St',
-      city: 'Salt Lake City, UT',
-      country: 'USA'}
-    };
-  constructor() { }
+events: IEvent[];
+ constructor(private route: ActivatedRoute, private toastr: ToastrService, private eventService: EventService) {}
 
   ngOnInit() {
+     this.events = this.route.snapshot.data['events'];
   }
 
-  handleEventClicked(data) {
+  handleThumbnailClick(name) {
 
   }
 
