@@ -6,11 +6,13 @@ import { CreateEventComponent } from './events/create-event/create-event.compone
 import { NotfoundComponent } from './errors/notfound.component';
 import { EventRouteActivator } from './events/event-details/event-route-activator';
 import { EventListResolver } from './events/event-list.resolver';
+import { CreateSessionComponent } from './events/event-details/create-session.component';
 
 const routes: Routes = [
   {path: 'events/new' , component: CreateEventComponent, canDeactivate:[ 'canDeactivateCreateEvent']},
   {path: 'events' , component: EventsListComponent, resolve:{events: EventListResolver}},
   {path: 'events/:id' , component: EventDetailsComponent, canActivate:[EventRouteActivator]},
+  {path: 'events/session/new' , component: CreateSessionComponent},
   {path: '404', component: NotfoundComponent },
   {path: '', redirectTo: '/events', pathMatch: 'full'},
   {path: 'user', loadChildren: './user/user.module#UserModule'}
