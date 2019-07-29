@@ -18,6 +18,7 @@ import { TOASTR_TOKEN, Toastr } from './shared/toastr.service';
 import { JQ_TOKEN } from './shared/jquery.service';
 import { SimpleModelComponent } from './shared/simple-model.component';
 import { ModalTriggerDirective } from './shared/modal-trigger.directive';
+import { HttpClientModule } from '@angular/common/http';
 
 let toastr: Toastr = window['toastr'];
 let jquery =  window['$'];
@@ -42,7 +43,8 @@ let jquery =  window['$'];
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     {provide: JQ_TOKEN, useValue: jquery},

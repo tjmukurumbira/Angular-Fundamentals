@@ -7,11 +7,12 @@ import { NotfoundComponent } from './errors/notfound.component';
 import { EventRouteActivator } from './events/event-details/event-route-activator';
 import { EventListResolver } from './events/event-list.resolver';
 import { CreateSessionComponent } from './events/event-details/create-session.component';
+import { EventResolver } from './events/event-details/event-resolver';
 
 const routes: Routes = [
   {path: 'events/new' , component: CreateEventComponent, canDeactivate:[ 'canDeactivateCreateEvent']},
   {path: 'events' , component: EventsListComponent, resolve:{events: EventListResolver}},
-  {path: 'events/:id' , component: EventDetailsComponent, canActivate:[EventRouteActivator]},
+  {path: 'events/:id' , component: EventDetailsComponent, resolve: {event: EventResolver} },
   {path: 'events/session/new' , component: CreateSessionComponent},
   {path: '404', component: NotfoundComponent },
   {path: '', redirectTo: '/events', pathMatch: 'full'},

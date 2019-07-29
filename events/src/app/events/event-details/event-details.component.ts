@@ -19,9 +19,12 @@ export class EventDetailsComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     this.route.params.forEach((params: Params)=>{
-      this.event = this.eventService.getEvent(+params['id'])
+       this.eventService.getEvent(+params['id']).subscribe((event: IEvent)=>{
+         this.event= this.route.snapshot.data['event'];
+         this.addMode= false;
+       })
     })
-    this.addMode= false;
+
 
   }
   ngOnChanges(): void {
@@ -35,8 +38,10 @@ export class EventDetailsComponent implements OnInit, OnChanges {
      const nextId = Math.max.apply(null, this.event.sessions.map(s=>s.id));
      session.id = nextId + 1;
      this.event.sessions.push(session);
-     this.eventService.updateEvent(this.event);
-     this.addMode = false;
+     this.eventService.saveEvent(this.event).subscribe(()=>{
+      this.addMode = false;
+     });
+
   }
 
   cancelAddSession() {
